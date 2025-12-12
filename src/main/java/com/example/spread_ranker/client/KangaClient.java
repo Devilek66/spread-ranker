@@ -30,7 +30,7 @@ public class KangaClient implements SpreadRepository {
     }
 
     public Mono<MarketOrderbook> getMarketOrderbook(String market) {
-        return externalApi.getMarketOrderbook(market).map(this::from).retryWhen(Retry.backoff(5, Duration.ofSeconds(2))
+        return externalApi.getMarketOrderbook(market).map(this::from).retryWhen(Retry.backoff(3, Duration.ofMillis(500))
                 .filter(throwable -> throwable instanceof WebClientRequestException)
                 .onRetryExhaustedThrow((retryBackoffSpec, retrySignal) ->
                         retrySignal.failure()
