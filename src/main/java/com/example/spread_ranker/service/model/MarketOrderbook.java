@@ -24,4 +24,12 @@ public class MarketOrderbook {
     public Ask bestAsk(){
         return Ask.bestAsk(this.asks);
     }
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public List<Ask> getAsks() {
+        return asks;
+    }
 }

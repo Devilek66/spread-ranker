@@ -37,10 +37,10 @@ public class KangaClient implements SpreadRepository {
                 ));
     }
 
-    private MarketOrderbook from(MarketOrderbookResponse response)
+    protected MarketOrderbook from(MarketOrderbookResponse response)
     {
-        var bids = response.bids().stream().map(bid -> new Bid(bid.price(), bid.amount())).toList();
-        var asks = response.asks().stream().map(ask -> new Ask(ask.price(), ask.amount())).toList();
+        var bids = response.bids().stream().map(bid -> new Bid(bid.price())).toList();
+        var asks = response.asks().stream().map(ask -> new Ask(ask.price())).toList();
         var tickerId = response.tickerId();
         return new MarketOrderbook(bids, asks, tickerId);
     }

@@ -4,14 +4,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.within;
-import static org.junit.jupiter.api.Assertions.*;
 
 class RankingElementTest {
 
     @Test
     void shouldCalculateSpreadCorrectly() {
-        Bid bid = new Bid(100, 1);
-        Ask ask = new Ask(102, 1);
+        Bid bid = new Bid(100);
+        Ask ask = new Ask(102);
 
         RankingElement element = new RankingElement("BTC_USD", bid, ask);
 
@@ -21,7 +20,7 @@ class RankingElementTest {
 
     @Test
     void shouldReturnNaNIfBidIsNull() {
-        Ask ask = new Ask(102, 1);
+        Ask ask = new Ask(102);
         RankingElement element = new RankingElement("BTC_USD", null, ask);
 
         assertThat(element.getSpread()).isNaN();
@@ -29,7 +28,7 @@ class RankingElementTest {
 
     @Test
     void shouldReturnNaNIfAskIsNull() {
-        Bid bid = new Bid(100, 1);
+        Bid bid = new Bid(100);
         RankingElement element = new RankingElement("BTC_USD", bid, null);
 
         assertThat(element.getSpread()).isNaN();
@@ -37,8 +36,8 @@ class RankingElementTest {
 
     @Test
     void shouldReturnNaNIfBidOrAskIsZero() {
-        Bid bid = new Bid(0, 1);
-        Ask ask = new Ask(102, 1);
+        Bid bid = new Bid(0);
+        Ask ask = new Ask(102);
         RankingElement element = new RankingElement("BTC_USD", bid, ask);
 
         assertThat(element.getSpread()).isNaN();

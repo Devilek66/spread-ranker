@@ -10,6 +10,12 @@ public class RankingElement {
         this.spread = calculateSpread(bestBid, bestAsk);
     }
 
+    public RankingElement(String market, double spread)
+    {
+        this.market = market;
+        this.spread = spread;
+    }
+
     public String getMarket() {
         return market;
     }
@@ -28,9 +34,8 @@ public class RankingElement {
 
         double spread = askPrice - bidPrice;
         double avg = 0.5 * (askPrice + bidPrice);
-        double spreadPercent = (spread / avg) * 100;
 
-        return spreadPercent;
+        return (spread / avg) * 100;
     }
 
     private boolean isNaN(Bid bid, Ask ask)

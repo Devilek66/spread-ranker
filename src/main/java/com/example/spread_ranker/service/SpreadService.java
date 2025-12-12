@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+
 @Service
 public class SpreadService {
+    private Ranking ranking = null;
     private final SpreadRepository spreadRepository;
 
     public SpreadService(SpreadRepository spreadRepository) {
@@ -19,6 +21,16 @@ public class SpreadService {
                 .flatMapMany(Flux::fromIterable)
                 .flatMap(ticker -> spreadRepository.getMarketOrderbook(ticker)
                         .map(marketOrderbook -> new RankingElement(marketOrderbook.getTickerId(), marketOrderbook.bestBid(), marketOrderbook.bestAsk())))
-                .collectList().map(Ranking::new);
+                .collectList().map(Ranking::new).doOnNext(r -> this.ranking = r);
+    }
+
+    public Mono<Ranking> ranking() {
+        return Mono.defer(() -> {
+            if (ranking == null) {
+                return calculate();
+            } else {
+                return Mono.just(ranking);
+            }
+        });
     }
 }

@@ -2,16 +2,13 @@ package com.example.spread_ranker.service.model;
 
 public abstract class Order {
     protected double price;
-    protected double volume;
 
-    public Order(double price, double volume) {
+    public Order(double price) {
         this.price = price;
-        this.volume = volume;
     }
 
-    public Order(String price, String volume) {
+    public Order(String price) {
         this.price = parseOrNaN(price);
-        this.volume = parseOrNaN(volume);
     }
 
     public double getPrice() {

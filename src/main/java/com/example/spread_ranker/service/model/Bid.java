@@ -4,17 +4,26 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Bid extends Order {
-    public Bid(double price, double amount) {
-        super(price, amount);
+    public Bid(double price) {
+        super(price);
     }
 
-    public Bid(String price, String amount) {
-        super(price, amount);
+    public Bid(String price) {
+        super(price);
     }
 
     public static Bid bestBid(List<Bid> bids) {
+        if(bids == null || bids.isEmpty())
+        {
+            return new Bid();
+        }
         return bids.stream()
                 .max(Comparator.comparingDouble(Bid::getPrice))
-                .orElse(new Bid(Double.NaN, Double.NaN));
+                .orElse(new Bid());
+    }
+
+    protected Bid()
+    {
+        super(Double.NaN);
     }
 }
