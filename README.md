@@ -4,13 +4,13 @@
     - Internet
 
 2. Build:
-   ./gradlew build
+   `./gradlew build`
 
 3. Run:
-   ./gradlew bootRun
+   `./gradlew bootRun`
 
 Aplikacja wystartuje pod adresem:
-http://localhost:8080
+`http://localhost:8080`
 
 Endpointy zabezpieczony Bearer tokenem (ABC123):
 
